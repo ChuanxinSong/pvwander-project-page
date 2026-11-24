@@ -28,6 +28,10 @@ h3{line-height:1.3;letter-spacing:-.02em}
 .method,.long-horizon,main #qualitative-comparisons{border-top:1px solid var(--rule);padding:clamp(36px,4.4vw,72px) 0;margin-top:0}
 .teaser { max-width:1040px; margin:clamp(20px,3vw,42px) auto; }
 .teaser-images { display:grid; grid-template-columns:minmax(0,1502fr) minmax(0,878fr); gap:14px; }
+.paper-abstract { max-width:46rem; margin:clamp(28px,3vw,44px) auto; scroll-margin-top:24px; }
+.paper-abstract h2 { margin-bottom:12px; text-align:center; }
+.paper-abstract p { font-size:clamp(1rem,1.2vw,1.0625rem); line-height:1.65; }
+.paper-abstract p + p { margin-top:.75em; }
 .method-overview { display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.5fr); gap:clamp(32px,5vw,76px); align-items:center; }
 .method-overview p, .method-designs p { color:var(--muted); line-height:1.65; max-width:64ch; }
 .method-overview p { margin-top:14px; }
