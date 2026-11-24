@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PVWander generates panoramic video along a camera path from a single panorama, using an online 3D memory.">
+  <title>PVWander · Panoramic Video Wandering</title>
+  <link rel="stylesheet" href="qualitative.css">
+  <link rel="stylesheet" href="more.css">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+<main id="top">
+  <section class="intro" aria-labelledby="title">
+    <div class="intro-copy">
+      <h1 id="title"><strong>PVWander</strong>: 3D Memory-guided Panoramic Video Wandering with <span class="keep-together">Path-Facing</span> Canonicalization</h1>
+      <p class="authors">
+        <span><a href="https://chuanxinsong.github.io/">Chuanxin Song</a><sup>1,2</sup></span>,
+        <span><a href="https://wang-xiaodong1899.github.io/">Xiaodong Wang</a><sup>1,2</sup></span>,
+        <span><a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=j88xXugAAAAJ">Shijie Chen</a><sup>1</sup></span>,
+        <span>Junliang Xie<sup>3</sup></span>, <span>Zhanmi Zhong<sup>3</sup></span>, <span>Suiying Wu<sup>3</sup></span>,
+        <span><a href="https://scholar.google.com/citations?user=CFMuFGoAAAAJ&amp;hl=zh-CN">Peixi Peng</a><sup>1,2,*</sup></span>
+      </p>
+      <p class="affiliations"><span><sup>1</sup> Peking University</span><span><sup>2</sup> Pengcheng Laboratory</span><span><sup>3</sup> Frontop</span></p>
+      <p class="correspondence">* Corresponding author</p>
+      <div class="publication-links">
+        <a href="assets/PVWander.pdf">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 2.5h8l4 4v15H6z M14 2.5v5h4 M9 12h6 M9 16h6"/></svg>
+          Paper (PDF)
+        </a>
+        <a href="https://github.com/ChuanxinSong/PVWander">
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.014 8.014 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          Code
+        </a>
+      </div>
+    </div>
+  </section>
+  <figure class="teaser" id="fig-1">
+    <div class="teaser-images">
+      <a href="assets/fig1-path-facing.png"><img src="assets/fig1-path-facing.png" width="1502" height="946" alt="Fig. 1, left. Path-Facing canonicalization reorients ERP to reduce variation in motion direction relative to per-frame ERP orientation."></a>
+      <a href="assets/fig1-gating.png"><img src="assets/fig1-gating.png" width="878" height="946" alt="Fig. 1, right. Timestep-aware gating modulates reprojected memory features over 50 denoising steps, from high to low noise."></a>
+    </div>
+    <figcaption class="figure-credit"><strong>Fig. 1.</strong> Two core designs in PVWander. Left: Path-Facing canonicalization reorients ERP to reduce variation in motion direction relative to per-frame ERP orientation. Right: Timestep-aware gating modulates reprojected memory features over 50 denoising steps, from high to low noise.</figcaption>
+  </figure>
+  <section id="qualitative-comparisons" aria-labelledby="results-title">
+    <h2 id="results-title">Qualitative comparisons</h2>
+    <div id="indoor-results" class="qc-carousel qc-indoor" data-comparison="indoor"></div>
+    <div id="outdoor-results" class="qc-carousel qc-outdoor" data-comparison="outdoor"></div>
+    <div id="more-results"></div>
+  </section>
+  <section id="long-horizon" class="long-horizon">
+    <h2>Long-horizon generation over 16 segments</h2>
+    <figure class="long16-demo">
+      <div class="long16-media">
+        <video id="long16-video" muted loop playsinline controls preload="metadata" poster="assets/long16-poster.jpg" src="assets/long16-projection-generation.mp4" aria-label="16-segment video: point-cloud projection above, generated panorama below"></video>
+        <span class="long16-label projection-label">Point-cloud projection</span>
+        <span class="long16-label generation-label">Generated panorama</span>
+      </div>
+      <div class="long16-trajectory"><span>Camera trajectory</span><svg viewBox="0 0 200 300" role="img" aria-label="Camera trajectory synchronized with all 1281 video frames"></svg></div>
+      <figcaption><div class="qc-toolbar"><button id="long16-play" type="button">Play</button><button id="long16-restart" type="button">Restart</button><span id="long16-frame">Frame 1 / 1281</span></div></figcaption>
+    </figure>
+  </section>
+  <section id="method" class="method">
+    <div class="method-overview">
+      <div>
+        <h2>Method</h2>
+        <p>Given an initial ERP panorama and user-specified long camera trajectories, PVWander generates panoramic video segment by segment with an online 3D point-cloud memory. The memory is reprojected to target viewpoints to guide each segment, and newly generated observations are lifted into 3D to update the memory for subsequent generation.</p>
+        <p>Each segment is conditioned on its first frame, the target camera trajectory, and the reprojected memory renders. The first-frame condition is the input panorama for the initial segment and the final frame of the preceding segment thereafter.</p>
+      </div>
+      <figure class="framework"><a href="assets/framework.png" aria-label="Open the PVWander framework diagram at full size"><img src="assets/framework.png" loading="lazy" alt="Overview of PVWander. Online 3D memory accumulates and reprojects generated observations to guide subsequent segments."></a></figure>
+    </div>
+    <div class="method-designs">
+      <div>
+        <h3>Path-Facing Canonicalization</h3>
+        <p>Path-Facing canonicalization reduces motion–orientation variation by aligning each segment's ERP orientation with its principal translation direction. It exploits the horizontal cyclic symmetry of ERP panoramas, which allows yaw reorientation through circular shifts while preserving scene coverage.</p>
+      </div>
+      <div>
+        <h3>Timestep-aware gating modulation</h3>
+        <p>Reprojected memory may contain unreliable local details caused by generation artifacts and depth inaccuracies, while still retaining useful coarse spatial structure. We therefore introduce Timestep-aware gating modulation, which learns channel-wise gates conditioned on the denoising timestep, allowing memory features to be attenuated or amplified without a hard cutoff.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="qualitative-data.js"></script><script src="more-data.js"></script>
+<script src="video-sync.js"></script><script src="project.js"></script>
+<script src="qualitative.js"></script><script src="more.js"></script>
+<script src="long16-data.js"></script><script src="long16.js"></script>
+</body></html>
