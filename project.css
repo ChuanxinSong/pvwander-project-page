@@ -17,7 +17,7 @@ main{width:var(--page);margin:auto}
 .authors a:hover, .authors a:focus-visible { text-decoration:underline; }
 .intro sup { font-size:.68em; line-height:0; }
 .affiliations { display:flex; justify-content:center; flex-wrap:wrap; gap:0 16px; margin:4px 0; font-size:clamp(1rem,1.35vw,1.2rem); line-height:1.55; }
-.correspondence { color:#555; font-size:.94rem; }
+.author-envelope { width:1.15em; height:auto; margin-left:.18em; vertical-align:baseline; }
 .publication-links { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:20px; }
 .publication-links a { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:40px; padding:6px 19px; border-radius:999px; color:#fff; background:#363636; font-size:1rem; }
 .publication-links a:hover { background:#242424; }
